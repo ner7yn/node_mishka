@@ -5,15 +5,18 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: 'dan.palabugin@yandex.ru',
         pass: 'gvylnpjvytileftj'
+    },
+    tls: {
+        rejectUnauthorized: false
     }
 });
 
-export async function sendEmail(to, subject, text) {
+export async function sendEmail(to, subject, html) {
     const mailOptions = {
         from: 'dan.palabugin@yandex.ru',
         to,
         subject,
-        text
+        html
     };
 
     try {
