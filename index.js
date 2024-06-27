@@ -32,9 +32,10 @@ app.use((req, res, next) => {
     res.status(404).send('Sorry, the resource you are looking for could not be found.');
 });
 
-app.listen(5000, (err) => {
-    if (err) {
-        return console.log(err);
-    }
-    return console.log("Server good");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, (err) => {
+  if (err) {
+    return console.log(err);
+  }
+  return console.log(`Server good on port ${PORT}`);
 });
