@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node app.js",
-    "ura": "nodemon index.js"
+    "ura": "nodemon index.js",
+    "build": "your-build-command"
   },
   "keywords": [],
   "author": "",
