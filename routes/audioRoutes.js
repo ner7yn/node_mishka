@@ -40,7 +40,7 @@ router.post('/create', async (req, res) => {
     const { name, category, audioFile, duration } = req.body;
 
 
-    const baseUrl = 'http://192.168.1.7:5000/uploads/';
+    const baseUrl = 'https://node-mishka.onrender.com/uploads/';
     try {
         const audio = new Audio({
             name,
