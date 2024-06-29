@@ -21,7 +21,13 @@ router.post('/upload', upload.single('audioFile'), async (req, res) => {
     const { originalname, filename } = req.file;
 
     try {
-        const filePath = path.join(path.dirname(path.win32.basename(new URL(import.meta.url).pathname)), '../node_mishka/uploads', filename);
+        const filePath = path.join(__dirname, './uploads', filename);
+
+        // Проверка наличия файла
+        if (!fs.existsSync(filePath)) {
+            return res.status(404).send('File not found.');
+        }
+
         const metadata = await parseFile(filePath);
         const duration = metadata.format.duration;
 
@@ -56,6 +62,20 @@ router.post('/create', async (req, res) => {
     }
 });
 
+router.delete('/delete/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const audio = await Audio.findByIdAndDelete(id);
+        if (!audio) {
+            return res.status(404).send('Audio not found.');
+        }
+        res.status(200).send(`Audio deleted successfully: ${audio.audioFile}`);
+    } catch (err) {
+        res.status(500).send(`Error deleting audio: ${err.message}`);
+    }
+});
+
 router.get('/all', async (req, res) => {
     try {
         const audios = await Audio.find();
@@ -64,5 +84,7 @@ router.get('/all', async (req, res) => {
         res.status(500).send(`Error fetching audio information: ${err.message}`);
     }
 });
+
+
 
 export default router;

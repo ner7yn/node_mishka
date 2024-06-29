@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import authRoutes from './routes/authRoutes.js';
 import audioRoutes from './routes/audioRoutes.js';
+import recordRoutes from './routes/RecordRoutes.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 app.use('/auth', authRoutes);
 app.use('/audio', audioRoutes);
+app.use('/record',recordRoutes);
 app.use(morgan('dev'));
 app.use((err, req, res, next) => {
     console.error(err.stack);

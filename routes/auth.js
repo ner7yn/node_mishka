@@ -106,7 +106,7 @@ export async function verifyCode(req, res) {
     const user = await prisma.user.findUnique({ where: { email } });
 
     if (user && user.code === code) {
-      res.status(200).json({ message: 'Code verified' });
+      res.status(200).json({ message: 'Code verified', userId: user.id });
     } else {
       res.status(401).json({ error: 'Invalid code' });
     }
