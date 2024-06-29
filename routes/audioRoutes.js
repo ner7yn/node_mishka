@@ -35,7 +35,6 @@ router.post('/upload', upload.single('audioFile'), async (req, res) => {
         const formattedDuration = formatDuration(duration);
 
         res.json({
-            duration: formattedDuration,
             audioFile: filename
         });
     } catch (err) {
