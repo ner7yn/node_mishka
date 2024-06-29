@@ -21,6 +21,7 @@ router.post('/upload', upload.single('audioFile'), async (req, res) => {
     const { originalname, filename } = req.file;
 
     try {
+        const __dirname = path.dirname(new URL(import.meta.url).pathname);
         const filePath = path.join(__dirname, '../uploads', filename);
 
         // Проверка наличия файла
