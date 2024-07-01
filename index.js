@@ -38,6 +38,17 @@ app.use((req, res, next) => {
     res.status(404).send('Sorry, the resource you are looking for could not be found.');
 });
 
+
+cron.schedule('*/10 * * * *', () => {
+  axios.get('https://node-mishka.onrender.com/')
+      .then(response => {
+          console.log('Scheduled GET request successful:', response.data);
+      })
+      .catch(error => {
+          console.error('Error with scheduled GET request:', error);
+      });
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, (err) => {
   if (err) {
