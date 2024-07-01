@@ -43,20 +43,30 @@ router.post('/upload', upload.single('audioFile'), async (req, res) => {
 });
 
 router.post('/create', async (req, res) => {
-    const { name, category, audioFile, duration } = req.body;
-
-
+    const audioItems = req.body; // Предполагается, что req.body теперь содержит массив объектов
     const baseUrl = 'https://node-mishka.onrender.com/uploads/';
-    try {
-        const audio = new Audio({
-            name,
-            category,
-            audioFile:baseUrl + audioFile,
-            duration
-        });
 
-        await audio.save();
-        res.send(`Audio information created successfully: ${audioFile}`);
+    try {
+        const createdAudios = [];
+
+        for (const item of audioItems) {
+            const { name, category, audioFile, duration } = item;
+
+            const audio = new Audio({
+                name,
+                category,
+                audioFile: baseUrl + audioFile,
+                duration
+            });
+
+            await audio.save();
+            createdAudios.push(audio);
+        }
+
+        res.status(201).json({
+            message: 'Audio information created successfully',
+            audios: createdAudios
+        });
     } catch (err) {
         res.status(500).send(`Error creating audio information: ${err.message}`);
     }
