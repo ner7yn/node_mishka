@@ -3,8 +3,8 @@ import nodemailer from 'nodemailer';
 const transporter = nodemailer.createTransport({
     service: 'Yandex',
     auth: {
-        user: 'dan.palabugin@yandex.ru',
-        pass: 'gvylnpjvytileftj'
+        user: 'besFriends@yandex.ru',
+        pass: 'gsxbclaeeiheotpz'
     },
     tls: {
         rejectUnauthorized: false
@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 
 export async function sendEmail(to, subject, html) {
     const mailOptions = {
-        from: 'dan.palabugin@yandex.ru',
+        from: 'besFriends@yandex.ru',
         to,
         subject,
         html

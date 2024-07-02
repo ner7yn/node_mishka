@@ -7,6 +7,8 @@ import audioRoutes from './routes/audioRoutes.js';
 import recordRoutes from './routes/RecordRoutes.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import cron from 'cron';
+import axios from 'axios';
 
 mongoose
     .connect('mongodb+srv://admin:admin@mishkaserver.3hjgkpz.mongodb.net/Mishka?retryWrites=true&w=majority&appName=MishkaServer')
@@ -39,7 +41,7 @@ app.use((req, res, next) => {
 });
 
 
-cron.schedule('*/10 * * * *', () => {
+const job = new cron.CronJob('*/10 * * * *', () => {
   axios.get('https://node-mishka.onrender.com/')
       .then(response => {
           console.log('Scheduled GET request successful:', response.data);
@@ -48,6 +50,8 @@ cron.schedule('*/10 * * * *', () => {
           console.error('Error with scheduled GET request:', error);
       });
 });
+
+job.start();
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, (err) => {
