@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/create', async (req, res) => {
     const { name, audioFile, duration, user } = req.body;
-    const baseUrl = 'https://node-mishka.onrender.com/uploads/';
+    const baseUrl = 'https://mishka-l3tq.onrender.com/uploads/';
     try {
         const record = new Record({
             name,

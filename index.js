@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 
 
 const job = new cron.CronJob('*/10 * * * *', () => {
-  axios.get('https://node-mishka.onrender.com/')
+  axios.get('https://mishka-l3tq.onrender.com/')
       .then(response => {
           console.log('Scheduled GET request successful:', response.data);
       })
