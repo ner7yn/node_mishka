@@ -3,7 +3,7 @@ import Record from '../model/Record.js';
 
 const router = express.Router();
 
-router.post('/create', async (req, res) => {
+router.post('/create_record', async (req, res) => {
     const { name, audioFile, duration, user } = req.body;
     const baseUrl = 'https://mishka-l3tq.onrender.com/uploads/';
     try {
