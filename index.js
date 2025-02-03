@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url';
 import cron from 'cron';
 import axios from 'axios';
 import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from './swagger-output.json' assert { type: 'json' };
+// import swaggerDocument from './swagger-output.json' assert { type: 'json' };
 
 mongoose
     .connect('mongodb+srv://admin:admin@mishkaserver.3hjgkpz.mongodb.net/Mishka?retryWrites=true&w=majority&appName=MishkaServer')
@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
     res.send('Hello, world!');
 });
 
-app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+//app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res, next) => {
     res.status(404).send('Sorry, the resource you are looking for could not be found.');
