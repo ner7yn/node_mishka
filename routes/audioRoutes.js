@@ -44,7 +44,7 @@ router.post('/upload', upload.single('audioFile'), async (req, res) => {
 
 router.post('/create', async (req, res) => {
     const audioItems = req.body; // Предполагается, что req.body теперь содержит массив объектов
-    const baseUrl = 'https://mishka-l3tq.onrender.com/uploads/';
+    const baseUrl = 'https://node-mishka.onrender.com/uploads/';
 
     try {
         const createdAudios = [];
