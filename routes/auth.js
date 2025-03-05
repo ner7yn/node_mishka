@@ -76,7 +76,7 @@ export async function generateCode(req, res) {
         <div class="container">
           <div class="logo">
             <!-- Вставьте сюда ваш логотип или название компании -->
-            <img src="https://i.yapx.cc/XnZu3.png" alt="Logo">
+            <img src="../Loading.png" alt="Logo">
           </div>
           <div class="message">
             <h1>Ваш код авторизации</h1>
