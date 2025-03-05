@@ -7,11 +7,13 @@ router.post('/create_record', async (req, res) => {
     const { name, audioFile, duration, user } = req.body;
     const baseUrl = 'https://node-mishka.onrender.com/uploads/';
     try {
+        const userId = mongoose.Types.ObjectId(user);
+
         const record = new Record({
             name,
-            audioFile:baseUrl + audioFile,
+            audioFile: baseUrl + audioFile,
             duration,
-            user
+            user: userId // Используем ObjectId
         });
 
         await record.save();

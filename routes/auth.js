@@ -95,7 +95,7 @@ export async function generateCode(req, res) {
     res.status(200).json({ message: 'Code sent to email' });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: 'Failed to send code' });
+    res.status(404).json({ error: 'Failed to send code' });
   }
 }
 
