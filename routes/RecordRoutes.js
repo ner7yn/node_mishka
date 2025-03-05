@@ -1,5 +1,6 @@
 import express from 'express';
 import Record from '../model/Record.js';
+import mongoose from 'mongoose';
 
 const router = express.Router();
 
