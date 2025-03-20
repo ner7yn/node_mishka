@@ -1,18 +1,16 @@
-import { PrismaClient } from "@prisma/client";
+import User from '../model/User.js';
 import { sendEmail } from '../services/emailService.js';
-
-const prisma = new PrismaClient();
 
 export async function generateCode(req, res) {
   const { email } = req.body;
   const code = Math.floor(100000 + Math.random() * 900000).toString();
 
   try {
-    const user = await prisma.user.upsert({
-      where: { email },
-      update: { code },
-      create: { email, code }
-    });
+    const user = await User.findOneAndUpdate(
+      { email }, // Условие поиска
+      { code }, // Данные для обновления
+      { upsert: true, new: true, setDefaultsOnInsert: true } // Опции
+  );
 
     const html = `
       <!DOCTYPE html>
@@ -103,14 +101,15 @@ export async function verifyCode(req, res) {
   const { email, code } = req.body;
 
   try {
-    const user = await prisma.user.findUnique({ where: { email } });
+      // Используем Mongoose для поиска пользователя
+      const user = await User.findOne({ email });
 
-    if (user && user.code === code) {
-      res.status(200).json({ message: 'Code verified', userId: user.id });
-    } else {
-      res.status(401).json({ error: 'Invalid code' });
-    }
+      if (user && user.code === code) {
+          res.status(200).json({ message: 'Code verified', userId: user._id });
+      } else {
+          res.status(401).json({ error: 'Invalid code' });
+      }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to verify code' });
+      res.status(500).json({ error: 'Failed to verify code' });
   }
 }
